@@ -14,6 +14,14 @@ public class Fact {
         this.blockX = blockX;
     }
 
+    public Fact(Fact other) {
+        this.type = other.type;
+        this.blockX = other.blockX;
+        if (other.blockY != null){
+            this.blockY = other.blockY;
+        } // If Block is mutable, use a copy constructor for Block as well
+    }
+
     public Block getBlockX() {
         return blockX;
     }

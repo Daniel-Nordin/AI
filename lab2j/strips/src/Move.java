@@ -27,22 +27,35 @@ public class Move {
 
     }
 
-    public State doMoveAction(){
+    public Move(Move other) {
+        this.state = other.state.copy(); // Deep copy of state
+        this.fromBlock = new Block(other.fromBlock);
+        this.destination = new Block(other.destination);
+    }
+
+    public State doMoveAction() {
+        // Create a copy of the state to work on
+        State newState = this.state.copy();
+    
+        // Create the effects of the move
         Fact unClearDest = new Fact("clear", destination);
         Fact delOn = new Fact("on", blockToMove, fromBlock);
         ArrayList<Fact> delEffect = new ArrayList<>();
         delEffect.add(delOn);
         delEffect.add(unClearDest);
-
+    
         Fact onFact = new Fact("on", blockToMove, destination);
         Fact clearLast = new Fact("clear", fromBlock);
         ArrayList<Fact> addEffect = new ArrayList<>();
         addEffect.add(onFact);
         addEffect.add(clearLast);
-
-        this.state.facts.removeAll(delEffect);
-        this.state.facts.addAll(addEffect);
-        return this.state;
+    
+        // Apply the effects to the copied state's facts
+        newState.facts.removeAll(delEffect);
+        newState.facts.addAll(addEffect);
+    
+        // Return the modified copy of the state
+        return newState;
     }
     
 }

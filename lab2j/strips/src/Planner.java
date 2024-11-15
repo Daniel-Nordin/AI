@@ -27,16 +27,14 @@ public class Planner {
 
         this.state.checkViableMoves();
         for (int index = 0; index < this.state.viableMoves.size(); index++) {
-         Move move = this.state.viableMoves.get(index);
-         State tempState = new State(null);
-         tempState = move.doMoveAction();
-         if (!this.visited.contains(tempState)) {
-            this.state = tempState;
-            this.state.viableBlocks = new ArrayList<Block>();
-            this.state.viableMoves = new ArrayList<Move>();
-            this.visited.add(this.state);
-            return this.state.toString();
-         }              
+            State tempState = this.state.copy();
+            Move move = tempState.viableMoves.get(index);
+            tempState = move.doMoveAction();
+            if (!this.visited.contains(tempState)) {
+                this.visited.add(this.state);
+                this.state = tempState;
+                return this.state.toString();
+            }              
         }
         int lastState = visited.indexOf(this.state);
         //this.state = visited.get(lastState - 1);

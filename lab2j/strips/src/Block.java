@@ -7,6 +7,11 @@ public class Block {
     this.weight = weight;
    }
 
+   public Block(Block other) {
+    this.name = other.name;
+    this.weight = other.weight;
+}
+
    public String getName() {
        return name;
    }
