@@ -8,6 +8,7 @@ public class Planner {
     public Planner(State initState, State goalState){
         this.state = initState;
         this.goalState = goalState;
+        this.visited.add(initState);
 
     }
 
@@ -27,14 +28,18 @@ public class Planner {
         this.state.checkViableMoves();
         for (int index = 0; index < this.state.viableMoves.size(); index++) {
          Move move = this.state.viableMoves.get(index);
-         if (!this.visited.contains(move.doMoveAction())) {
-            this.state = move.doMoveAction();
+         State tempState = new State(null);
+         tempState = move.doMoveAction();
+         if (!this.visited.contains(tempState)) {
+            this.state = tempState;
             this.state.viableBlocks = new ArrayList<Block>();
             this.state.viableMoves = new ArrayList<Move>();
             this.visited.add(this.state);
             return this.state.toString();
          }              
         }
+        int lastState = visited.indexOf(this.state);
+        //this.state = visited.get(lastState - 1);
        return "dead end";
     }
 }

@@ -41,7 +41,7 @@ public class App {
         Planner planner = new Planner(initState, goalState);
         while (planner.state != goalState) {
             planner.checkViableBlocks();
-        System.out.println(planner.makeMove());
+            System.out.println(planner.makeMove());
         }
         
        
