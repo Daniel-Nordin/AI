@@ -33,6 +33,7 @@ public class Planner {
             if (!this.visited.contains(tempState)) {
                 this.visited.add(this.state);
                 this.state = tempState;
+                System.out.println(move.toString());
                 return this.state.toString();
             }              
         }

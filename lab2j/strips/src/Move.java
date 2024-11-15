@@ -58,4 +58,15 @@ public class Move {
         return newState;
     }
     
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(blockToMove.toString());
+        sb.append(" moved from ");
+        sb.append(fromBlock.toString());
+        sb.append(" to ");
+        sb.append(destination.toString());
+        return sb.toString();
+    }
 }
